@@ -12,9 +12,20 @@ class OptionalTests < MiniTest::Unit::TestCase
     member = Member.new(user)
     crew = Crew.new(member)
     
-    assert_equal crew.owner.user.name, user_name
+    assert_equal user_name_of_crew_owner(crew), user_name
   end
   
+  def test_user_name_is_nil
+    member = Member.new(nil)
+    crew = Crew.new(member)
+    
+    assert_nil user_name_of_crew_owner(crew)
+  end
+
+end
+
+def user_name_of_crew_owner(crew)
+  crew.owner.user.name
 end
 
   
