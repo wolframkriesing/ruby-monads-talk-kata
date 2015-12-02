@@ -34,8 +34,14 @@ def user_name_of_crew_owner(crew)
   owner = crew.owner
   return nil unless owner
   user = owner.user
-  return nil unless user
-  user.name
+  try(user, :name)
+end
+
+def try(obj, property)
+  if obj.respond_to? property
+    return obj.send property
+  end
+  nil
 end
 
   
