@@ -31,10 +31,7 @@ class OptionalTests < MiniTest::Unit::TestCase
 end
 
 def user_name_of_crew_owner(crew)
-  owner = crew.owner
-  return nil unless owner
-  user = owner.user
-  try(user, :name)
+  try(try(try(crew, :owner), :user), :name)
 end
 
 def try(obj, property)
