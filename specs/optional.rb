@@ -34,8 +34,8 @@ def user_name_of_crew_owner(crew)
   owner = crew.owner
   return nil unless owner
   user = owner.user
-  return user.name if user
-  nil
+  return nil unless user
+  user.name
 end
 
   
