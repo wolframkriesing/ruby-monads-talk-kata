@@ -27,11 +27,12 @@ class OptionalTests < MiniTest::Unit::TestCase
     
     assert_nil user_name_of_crew_owner(crew)
   end
-
+  
 end
 
 def user_name_of_crew_owner(crew)
-  try(try(try(crew, :owner), :user), :name)
+  user = try(try(crew, :owner), :user)
+  Optional.new(user).name
 end
 
 def try(obj, property)
@@ -39,6 +40,15 @@ def try(obj, property)
     return obj.send property
   end
   nil
+end
+
+class Optional
+  def initialize(obj)
+    @obj = obj
+  end
+  def method_missing(name)
+    try(@obj, name)
+  end
 end
 
   
