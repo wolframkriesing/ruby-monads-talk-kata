@@ -25,7 +25,9 @@ class OptionalTests < MiniTest::Unit::TestCase
 end
 
 def user_name_of_crew_owner(crew)
-  crew.owner.user.name
+  user = crew.owner.user
+  return user.name if user
+  nil
 end
 
   
