@@ -36,19 +36,17 @@ def user_name_of_crew_owner(crew)
   Optional.new(user).name
 end
 
-def try(obj, property)
-  if obj.respond_to? property
-    return obj.send property
-  end
-  nil
-end
 
 class Optional
   def initialize(obj)
     @obj = obj
   end
   def method_missing(name)
-    try(@obj, name)
+    if @obj.respond_to? name
+      @obj.send name
+    else
+      nil
+    end
   end
 end
 
