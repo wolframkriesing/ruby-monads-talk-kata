@@ -31,7 +31,8 @@ class OptionalTests < MiniTest::Unit::TestCase
 end
 
 def user_name_of_crew_owner(crew)
-  user = try(try(crew, :owner), :user)
+  owner = Optional.new(crew).owner
+  user = Optional.new(owner).user
   Optional.new(user).name
 end
 
